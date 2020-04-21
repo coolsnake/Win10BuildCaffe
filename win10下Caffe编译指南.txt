@@ -20,10 +20,22 @@
     NVCUDASAMPLES10_0_ROOT = C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.0
     NVTOOLSEXT_PATH = C:\Program Files\NVIDIA Corporation\NvToolsExt\
 
-4. anaconda切换到py3.5环境，
-    然后进入caffe-windows\scripts目录，执行build_win.cmd
+4. 设置OpenCV的环境变量
+    OpenCV_DIR = D:\opencv3.4.1\opencv\build\x64\vc15\lib
 
-5. 只能在py35的环境下使用caffe.
+5. anaconda创建py3.5的环境，并且切换到py3.5环境，
+    然后进入caffe-windows\scripts目录，执行build_win.cmd
+   遇到问题后，执行第6步和第7步
+
+6. 将OpenCVConfig.cmake复制到C:\Users\DELL\.caffe\dependencies\libraries目录下，
+    覆盖OpenCVConfig.cmake   
+
+7. 将nvcc.hpp复制到C:\Users\DELL\.caffe\dependencies\libraries\include\boost-1_61\boost\config\compiler目录下
+    覆盖nvcc.hpp
+
+8. 重新执行build_win.cmd，进行编译
+
+9. 只能在py35的环境下使用caffe.
 
 ================================================
 
