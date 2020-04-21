@@ -3,7 +3,8 @@
     https://github.com/BVLC/caffe/tree/windows
 
 2. 将cmake和scripts目录复制到caffe-windows目录
-    到https://developer.nvidia.com/cuda-gpus查询GPU的算力，并且修改cmake\Cuda.cmake中
+    1）scripts/build_win.cmd使用vs2017的环境设置。
+    2）到https://developer.nvidia.com/cuda-gpus查询GPU的算力，并且修改cmake\Cuda.cmake中
     set(__cuda_arch_bin "75")。 ------------> RTX2080的算力是75
 
 3. 设置CUDA的环境变量。比如
@@ -23,19 +24,27 @@
 4. 设置OpenCV的环境变量
     OpenCV_DIR = D:\opencv3.4.1\opencv\build\x64\vc15\lib
 
-5. anaconda创建py3.5的环境，并且切换到py3.5环境，
-    然后进入caffe-windows\scripts目录，执行build_win.cmd
+5. 删除环境变量中boost的一些设置，如果存在的话；同时删除path中python的路径，如果存在的话
+
+6. anaconda创建py3.5的环境，并且切换到py3.5环境，
+   然后进入caffe-windows\scripts目录，执行build_win.cmd
    遇到问题后，执行第6步和第7步
 
-6. 将OpenCVConfig.cmake复制到C:\Users\DELL\.caffe\dependencies\libraries目录下，
+7. 将OpenCVConfig.cmake复制到C:\Users\DELL\.caffe\dependencies\libraries目录下，
     覆盖OpenCVConfig.cmake   
 
-7. 将nvcc.hpp复制到C:\Users\DELL\.caffe\dependencies\libraries\include\boost-1_61\boost\config\compiler目录下
+8. 将nvcc.hpp复制到C:\Users\DELL\.caffe\dependencies\libraries\include\boost-1_61\boost\config\compiler目录下
     覆盖nvcc.hpp
 
-8. 重新执行build_win.cmd，进行编译
+9. 重新执行build_win.cmd，进行编译
 
-9. 只能在py35的环境下使用caffe.
+10. 将%CAFFE_DIR%\caffe\python路径下的caffe文件夹复制到Anaconda中虚拟环境py35的site-packages路径下，参考路径D:\Anaconda3_64\envs\py35\Lib\site-packages。
+    在py35虚拟环境下，运行命令进入python命令编辑模式。
+    Python
+    运行命令
+    import caffe
+    如果没有报错则说明成功安装。
+
 
 ================================================
 
