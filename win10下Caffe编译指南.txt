@@ -22,7 +22,8 @@
     NVTOOLSEXT_PATH = C:\Program Files\NVIDIA Corporation\NvToolsExt\
 
 4. 设置OpenCV的环境变量
-    OpenCV_DIR = D:\opencv3.4.1\opencv\build\x64\vc15\lib
+    将opencv3.4.1目录复制到D盘，同时环境变量
+    OpenCV_DIR = D:\opencv3.4.1\x64\vc15\lib
 
 5. 删除环境变量中boost的一些设置，如果存在的话；同时删除path中python的路径，如果存在的话
 
