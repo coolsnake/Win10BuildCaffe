@@ -1,0 +1,57 @@
+编译过程：同时参考Win10使用VS2017安装Caffe详细总结.docx
+1. 下载caffe-windows的版本，并且解压
+    https://github.com/BVLC/caffe/tree/windows
+
+2. 将cmake和scripts目录复制到caffe-windows目录
+    到https://developer.nvidia.com/cuda-gpus查询GPU的算力，并且修改cmake\Cuda.cmake中
+    set(__cuda_arch_bin "75")。 ------------> RTX2080的算力是75
+
+3. 设置CUDA的环境变量。比如
+    CUDA_BIN_PATH = C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin
+    CUDA_LIB_PATH  = C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\lib\x64
+    CUDA_PATH        = C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0
+    CUDA_PATH_V10_0 = C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0
+
+    CUDA_SDK_BIN_PATH = C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.0\bin\win64
+    CUDA_SDK_LIB_PATH = C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.0\common\lib\x64
+    CUDA_SDK_PATH       = C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.0
+
+    NVCUDASAMPLES_ROOT = C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.0
+    NVCUDASAMPLES10_0_ROOT = C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.0
+    NVTOOLSEXT_PATH = C:\Program Files\NVIDIA Corporation\NvToolsExt\
+
+4. anaconda切换到py3.5环境，
+    然后进入caffe-windows\scripts目录，执行build_win.cmd
+
+5. 只能在py35的环境下使用caffe.
+
+================================================
+
+Win10使用VS2017安装Caffe详细总结
+https://blog.csdn.net/fengtaoO08/article/details/83023428
+
+Configure Caffe in one hour for Windows users.
+https://github.com/happynear/caffe-windows
+
+=========================================
+1. Aanaconda 切换到python3.5的版本
+
+2. 对于VS2017，进入C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build目录，复制vcvars64.bat为vcvars64_VC141x.bat
+
+   内容改为@call "%~dp0vcvarsall.bat" x64 -vcvars_ver=14.1x %*
+
+   其中x可以到C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC查看。
+   目前版本是14.16
+
+3.进入D:\caffe-builder，复制build_v140_x64.cmd为build_v141_x64.cmd
+   修改2~9行，
+if NOT EXIST build_v141_x64 (
+mkdir build_v141_x64
+)
+
+pushd build_v141_x64
+:: Setup the environement for VS 2015 x64
+:: call "%VS140COMNTOOLS%..\..\VC\vcvarsall.bat" amd64
+:: Setup the environement for VS 2017 x64
+:: call "!VS%MSVC_VERSION%0COMNTOOLS!..\..\VC\vcvarsall.bat" amd64
+call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars64_VC1416.bat" amd64
